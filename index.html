@@ -3,300 +3,382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stashfin — Kitchen Appliance Catalogue</title>
+<title>Stashfin — Kitchen Appliances</title>
+<meta name="description" content="Stashfin builds kitchen appliances for everyday American homes. Ten essentials, engineered to last, backed by a two-year warranty.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1C1B19;
-    --paper:#F2EDE4;
-    --paper-2:#E8E0D0;
-    --copper:#C1673B;
-    --copper-dark:#9A4E2C;
-    --steel:#6E7673;
-    --brass:#C9A15A;
-    --line: rgba(28,27,25,0.16);
+    --bg:#F5E8D9;          /* matches poster background exactly */
+    --bg-deep:#EFE0CE;
+    --ink:#1A1918;
+    --ink-soft:#4A443E;
+    --muted:#8A7F72;
+    --accent:#7A4A28;
+    --line:rgba(26,25,24,0.12);
+    --max:1240px;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body{
-    margin:0;
-    background:var(--paper);
+    background:var(--bg);
     color:var(--ink);
-    font-family:'Space Grotesk', sans-serif;
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
-  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; }
+  img{ max-width:100%; display:block; }
+  h1,h2,h3{ font-family:'Archivo',sans-serif; line-height:1.05; letter-spacing:-0.02em; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+  @media (min-width:768px){ .wrap{ padding:0 40px; } }
 
-  /* ---------- NAV ---------- */
-  nav{
-    position:sticky; top:0; z-index:50;
+  /* ============ HEADER ============ */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(245,232,217,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--max); margin:0 auto; padding:16px 24px;
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 40px;
-    background:rgba(242,237,228,0.88);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
   }
-  .brand{ display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:22px; }
-  .brand-mark{ width:30px; height:30px; }
-  nav .links{ display:flex; gap:28px; font-size:14px; }
-  nav a{ color:var(--ink); text-decoration:none; opacity:0.75; }
-  nav a:hover, nav a:focus-visible{ opacity:1; }
+  @media (min-width:768px){ .nav{ padding:18px 40px; } }
+  .logo{
+    font-family:'Archivo',sans-serif; font-weight:800; font-size:20px;
+    letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); text-decoration:none;
+  }
+  @media (min-width:768px){ .logo{ font-size:22px; } }
+  .nav-links{ display:none; gap:34px; }
+  @media (min-width:768px){ .nav-links{ display:flex; } }
+  .nav-links a{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    letter-spacing:0.01em; transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--ink); }
+  .nav-cta{
+    background:var(--ink); color:var(--bg); text-decoration:none;
+    font-size:13px; font-weight:600; padding:10px 20px; border-radius:100px;
+    letter-spacing:0.02em; transition:background .2s; white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--accent); }
+  .nav-mobile{
+    display:flex; gap:26px; padding:0 24px 12px;
+    max-width:var(--max); margin:0 auto;
+    border-top:1px solid var(--line); padding-top:12px;
+  }
+  .nav-mobile a{
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; font-weight:500;
+  }
+  .nav-mobile a:hover{ color:var(--ink); }
+  @media (min-width:768px){ .nav-mobile{ display:none; } }
 
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    padding:110px 40px 90px;
-    overflow:hidden;
-    border-bottom:1px solid var(--line);
+  /* ============ HERO ============ */
+  .hero{ padding:56px 0 40px; }
+  @media (min-width:900px){ .hero{ padding:84px 0 64px; } }
+  .hero-grid{ display:grid; gap:36px; align-items:center; }
+  @media (min-width:900px){ .hero-grid{ grid-template-columns:1fr 1.05fr; gap:56px; } }
+  .kicker{
+    font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:22px; display:flex; align-items:center; gap:12px;
   }
-  .hero-inner{ max-width:1180px; margin:0 auto; position:relative; z-index:2; }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'JetBrains Mono',monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:0.14em;
-    color:var(--copper-dark); margin-bottom:26px;
-  }
-  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--copper-dark); }
+  .kicker::after{ content:''; flex:1; height:1px; background:var(--line); max-width:80px; }
   .hero h1{
-    font-size:clamp(42px, 6.4vw, 92px);
-    line-height:0.98; font-weight:600; letter-spacing:-0.01em;
-    max-width:14ch;
+    font-size:clamp(38px, 8.5vw, 76px); font-weight:800; text-transform:uppercase;
   }
-  .hero h1 em{ font-style:italic; color:var(--copper); font-weight:500; }
+  .hero h1 span{ display:block; color:var(--accent); }
   .hero p{
-    max-width:46ch; margin-top:26px; font-size:17px; line-height:1.6; color:#3a3835;
+    margin-top:22px; font-size:16px; color:var(--ink-soft); max-width:44ch;
   }
-  .hero-meta{
-    margin-top:56px; display:flex; gap:56px; flex-wrap:wrap;
+  @media (min-width:768px){ .hero p{ font-size:17.5px; } }
+  .hero-actions{ margin-top:32px; display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-actions .btn{ flex:1 1 auto; min-width:150px; }
+  @media (min-width:560px){ .hero-actions .btn{ flex:0 0 auto; } }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:600; letter-spacing:0.02em;
+    padding:15px 30px; border-radius:100px; text-decoration:none; transition:all .2s;
   }
-  .hero-meta div{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--steel); }
-  .hero-meta strong{ display:block; font-family:'Fraunces',serif; font-size:30px; color:var(--ink); font-weight:600; }
+  .btn-solid{ background:var(--ink); color:var(--bg); }
+  .btn-solid:hover{ background:var(--accent); }
+  .btn-ghost{ border:1.5px solid var(--ink); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--bg); }
+  .hero-img{ border-radius:4px; }
 
-  .hero-rack{
-    position:absolute; right:-20px; top:40px; width:440px; max-width:38vw; opacity:0.96; z-index:1;
-    border-radius:2px;
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
+    margin-top:52px; padding-top:32px; border-top:1px solid var(--line);
   }
-  @media (max-width:860px){ .hero-rack{ display:none; } }
+  .hero-stats .n{
+    font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(24px,5vw,36px);
+    display:block; line-height:1;
+  }
+  .hero-stats .l{
+    font-size:11px; color:var(--muted); text-transform:uppercase;
+    letter-spacing:0.1em; margin-top:8px; display:block; line-height:1.4;
+  }
+  @media (min-width:768px){ .hero-stats .l{ font-size:12px; } }
 
-  /* ---------- SECTION LABEL ---------- */
-  .section-head{
-    max-width:1180px; margin:0 auto; padding:64px 40px 28px;
-    display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  /* ============ SECTION HEADING ============ */
+  .sec{ padding:60px 0; }
+  @media (min-width:768px){ .sec{ padding:88px 0; } }
+  .sec-head{ margin-bottom:40px; }
+  @media (min-width:768px){ .sec-head{ margin-bottom:56px; } }
+  .sec-head h2{
+    font-size:clamp(28px,5.5vw,46px); font-weight:800; text-transform:uppercase;
   }
-  .section-head h2{ font-size:clamp(28px,3.2vw,40px); font-weight:600; }
-  .section-head .count{ font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--steel); }
+  .sec-head p{ margin-top:14px; color:var(--ink-soft); font-size:16px; max-width:52ch; }
 
-  /* ---------- GRID ---------- */
-  .grid{
-    max-width:1180px; margin:0 auto; padding:0 40px 80px;
-    display:grid; grid-template-columns:repeat(3,1fr); gap:26px;
+  /* ============ PRODUCT GRID ============ */
+  .products{
+    display:grid; grid-template-columns:1fr; gap:8px;
   }
-  @media (max-width:980px){ .grid{ grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:640px){ .grid{ grid-template-columns:1fr; padding:0 20px 60px;} .hero{padding:90px 20px 60px;} nav{padding:16px 20px;} .section-head{padding:48px 20px 24px;} }
+  @media (min-width:600px){ .products{ grid-template-columns:repeat(2,1fr); gap:12px; } }
+  @media (min-width:1000px){ .products{ grid-template-columns:repeat(3,1fr); gap:16px; } }
+  .product{
+    display:block; border-radius:6px; overflow:hidden;
+    transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
+    background:var(--bg);
+  }
+  .product img{ width:100%; height:auto; }
+  .product:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 44px -26px rgba(26,25,24,0.45);
+  }
 
-  .card{
-    position:relative;
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:2px;
-    padding:26px 22px 22px;
-    display:flex; flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  /* ============ VALUES ============ */
+  .values{ background:var(--bg-deep); }
+  .val-grid{ display:grid; gap:36px; }
+  @media (min-width:768px){ .val-grid{ grid-template-columns:repeat(3,1fr); gap:48px; } }
+  .val .num{
+    font-family:'Archivo',sans-serif; font-weight:800; font-size:13px;
+    color:var(--accent); letter-spacing:0.12em; display:block; margin-bottom:16px;
   }
-  .card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 30px -18px rgba(28,27,25,0.35);
-    border-color:rgba(28,27,25,0.3);
-  }
-  .card::before{
-    content:''; position:absolute; top:-1px; left:24px; width:14px; height:14px;
-    background:var(--paper); border:1px solid var(--line); border-top:none;
-    border-radius:0 0 50% 50%;
-  }
-  .tag-row{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; }
-  .sku{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--steel); }
-  .badge{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--copper-dark); border:1px solid var(--copper-dark); padding:3px 8px; border-radius:20px;
-  }
-  .icon-wrap{
-    height:132px; display:flex; align-items:center; justify-content:center;
-    background:var(--paper-2); border-radius:2px; margin-bottom:20px;
-  }
-  .icon-wrap svg{ width:74px; height:74px; stroke:var(--ink); }
-  .card h3{ font-size:21px; font-weight:600; line-height:1.15; }
-  .card .desc{ font-size:13.5px; color:#4a4844; line-height:1.55; margin-top:8px; flex-grow:1; }
-  .specs{ display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
-  .specs span{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; background:var(--paper-2);
-    padding:4px 8px; border-radius:3px; color:#3a3835;
-  }
-.card-img{ width:100%; display:block; border-radius:2px; }
-  .card{ padding:0; overflow:hidden; }
-  .card::before{ display:none; }
-  .card .tag-row{ position:absolute; top:14px; left:14px; right:14px; z-index:2; margin:0; }
-  .card{ position:relative; }
-  .card .sku, .card .badge{ background:rgba(242,237,228,0.9); }
-  .card .sku{ padding:3px 8px; border-radius:3px; }
+  .val h3{ font-size:21px; font-weight:700; margin-bottom:12px; }
+  .val p{ color:var(--ink-soft); font-size:15px; }
 
-  /* ---------- STRIP ---------- */
-  .strip{
-    background:var(--ink); color:var(--paper); padding:50px 40px; overflow:hidden;
+  /* ============ SPEC TABLE ============ */
+  table{ width:100%; border-collapse:collapse; }
+  th{
+    text-align:left; font-family:'Archivo',sans-serif; font-weight:700; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.12em; color:var(--muted);
+    padding:0 20px 14px 0; border-bottom:1.5px solid var(--ink);
   }
-  .strip-track{ display:flex; gap:48px; white-space:nowrap; animation:scroll 22s linear infinite; }
-  .strip:hover .strip-track{ animation-play-state:paused; }
-  .strip span{ font-family:'Fraunces',serif; font-style:italic; font-size:26px; opacity:0.9; }
-  .strip span::after{ content:'—'; margin-left:48px; color:var(--copper); font-style:normal; }
-  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  td{
+    padding:18px 20px 18px 0; border-bottom:1px solid var(--line);
+    font-size:14.5px; color:var(--ink-soft); vertical-align:top;
+  }
+  td:first-child{ font-weight:600; color:var(--ink); }
 
-  /* ---------- ABOUT / SIGNATURE ---------- */
-  .about{
-    max-width:1180px; margin:0 auto; padding:90px 40px; display:grid;
-    grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  /* Mobile: stack each row as its own card — no sideways scrolling */
+  @media (max-width:719px){
+    thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+    tr{
+      display:block; padding:20px 0; border-bottom:1px solid var(--line);
+    }
+    tr:last-child{ border-bottom:none; }
+    td{
+      display:flex; justify-content:space-between; gap:20px;
+      padding:5px 0; border:none; text-align:right; font-size:14px;
+    }
+    td::before{
+      content:attr(data-label);
+      font-family:'Archivo',sans-serif; font-weight:700; font-size:10.5px;
+      text-transform:uppercase; letter-spacing:0.1em; color:var(--muted);
+      text-align:left; flex-shrink:0; padding-top:2px;
+    }
+    td:first-child{
+      display:block; text-align:left; font-family:'Archivo',sans-serif;
+      font-size:19px; font-weight:700; margin-bottom:12px;
+    }
+    td:first-child::before{ display:none; }
   }
-  @media (max-width:860px){ .about{ grid-template-columns:1fr; padding:70px 20px; } }
-  .about h2{ font-size:clamp(30px,4vw,46px); font-weight:600; line-height:1.05; }
-  .about p{ margin-top:20px; color:#3a3835; line-height:1.65; font-size:15.5px; max-width:48ch; }
-  .stash-label{
-    background:var(--paper-2); border:1px solid var(--line); padding:30px; position:relative;
-  }
-  .stash-label .row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--line); font-family:'JetBrains Mono',monospace; font-size:12.5px; }
-  .stash-label .row:last-child{ border-bottom:none; }
-  .stash-label .row strong{ font-family:'Fraunces',serif; font-size:15px; font-weight:600; }
+  @media (min-width:720px){ tr:hover td{ background:rgba(26,25,24,0.025); } }
 
-  /* ---------- FOOTER ---------- */
-  footer{
-    border-top:1px solid var(--line); padding:40px; display:flex; justify-content:space-between;
-    align-items:center; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--steel);
+  /* ============ CTA ============ */
+  .cta{ background:var(--ink); color:var(--bg); text-align:center; }
+  .cta h2{ font-size:clamp(28px,5.5vw,50px); font-weight:800; text-transform:uppercase; }
+  .cta p{ margin:20px auto 0; max-width:48ch; color:rgba(245,232,217,0.72); font-size:16px; }
+  .cta .btn-solid{ background:var(--bg); color:var(--ink); margin-top:34px; }
+  .cta .btn-solid:hover{ background:#fff; }
+
+  /* ============ FOOTER ============ */
+  footer{ border-top:1px solid var(--line); padding:44px 0 40px; }
+  .foot{ display:grid; gap:26px; }
+  @media (min-width:768px){
+    .foot{ grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
   }
-  footer .brand{ font-size:16px; }
-  @media (prefers-reduced-motion: reduce){
-    .strip-track{ animation:none; }
+  .foot p{ font-size:14px; color:var(--ink-soft); margin-top:14px; max-width:34ch; }
+  .foot h4{
+    font-family:'Archivo',sans-serif; font-size:11px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); margin-bottom:14px;
+  }
+  .foot a{ display:block; color:var(--ink-soft); text-decoration:none; font-size:14.5px; padding:5px 0; }
+  .foot a:hover{ color:var(--ink); }
+  .foot-base{
+    margin-top:40px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-size:13px; color:var(--muted);
+  }
+
+  a:focus-visible, .product:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
     html{ scroll-behavior:auto; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="brand">
-    <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 12 L8 26 L24 26 L24 12"/><path d="M6 12 L26 12 L23 5 L9 5 Z"/><line x1="16" y1="16" x2="16" y2="22"/></svg>
-    Stashfin
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Stashfin</a>
+    <div class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#why">Why Stashfin</a>
+      <a href="#specs">Specifications</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+  <div class="nav-mobile">
+    <a href="#products">Products</a>
+    <a href="#why">Why Stashfin</a>
+    <a href="#specs">Specifications</a>
   </div>
-  <div class="links">
-    <a href="#catalogue">Catalogue</a>
-    <a href="#about">The Stash</a>
-    <a href="#footer">Contact</a>
-  </div>
-</nav>
+</header>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">Catalogue 001 — Kitchen Edition</div>
-    <h1>Everything worth <em>stashing</em> in your kitchen.</h1>
-    <p>Ten essentials, picked for daily use and built to outlast the trend cycle. No clutter, no filler — just the appliances a working kitchen actually reaches for.</p>
-    <div class="hero-meta">
-      <div><strong>10</strong>Products listed</div>
-      <div><strong>02</strong>Year warranty, standard</div>
-      <div><strong>US</strong>Free nationwide shipping</div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">Kitchen Appliances</div>
+        <h1>Built for<br>the way you<span>actually cook.</span></h1>
+        <p>Ten kitchen essentials engineered for daily American households — reliable motors, honest specifications, and parts you can replace instead of throwing the whole thing away.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-solid">View the collection</a>
+          <a href="#why" class="btn btn-ghost">Our approach</a>
+        </div>
+      </div>
+      <!-- Swap the src below with images/hero-banner.png once generated -->
+      <img class="hero-img" src="images/hero-banner.png" alt="Stashfin kitchen organizer with storage jars">
     </div>
-    <div class="card-foot">In Stock — Ships in 24h</div>
+
+    <div class="hero-stats">
+      <div><span class="n">10</span><span class="l">Products in the line</span></div>
+      <div><span class="n">2 yr</span><span class="l">Standard warranty</span></div>
+      <div><span class="n">Free</span><span class="l">US-wide shipping</span></div>
+    </div>
   </div>
-  <img class="hero-rack" src="images/organizer.png" alt="Stashfin Kitchen Organizer">
 </section>
 
-<div class="section-head" id="catalogue">
-  <h2>The full stash</h2>
-  <div class="count mono">ITEMS 01 – 10</div>
-</div>
-
-<div class="grid">
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 01</span><span class="badge">Bestseller</span></div>
-    <img class="card-img" src="images/mixer-grinder.png" alt="Pulse Mixer Grinder">
+<section class="sec" id="products">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The Collection</h2>
+      <p>Every appliance in the Stashfin line, photographed and specified. No trend pieces, no filler — each one earns its place on the counter.</p>
+    </div>
+    <div class="products">
+      <a class="product" href="#specs"><img src="images/mixer-grinder.png" alt="Stashfin mixer grinder, 750W with three stainless steel jars"></a>
+      <a class="product" href="#specs"><img src="images/kettle.png" alt="Stashfin electric kettle, 1.7 litre stainless steel"></a>
+      <a class="product" href="#specs"><img src="images/air-fryer.png" alt="Stashfin air fryer, 4.5 quart with digital presets"></a>
+      <a class="product" href="#specs"><img src="images/induction-cooktop.png" alt="Stashfin induction cooktop, 2000W with seven power levels"></a>
+      <a class="product" href="#specs"><img src="images/toaster.png" alt="Stashfin two-slice toaster with six browning levels"></a>
+      <a class="product" href="#specs"><img src="images/microwave.png" alt="Stashfin microwave oven with convection and grill"></a>
+      <a class="product" href="#specs"><img src="images/blender.png" alt="Stashfin blender, 1000W with four interchangeable jars"></a>
+      <a class="product" href="#specs"><img src="images/rice-cooker.png" alt="Stashfin rice cooker, eight cup capacity"></a>
+      <a class="product" href="#specs"><img src="images/sandwich-maker.png" alt="Stashfin sandwich maker with four-slice non-stick plates"></a>
+      <a class="product" href="#specs"><img src="images/juicer.png" alt="Stashfin cold-press juicer with slow-press motor"></a>
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 02</span><span class="badge">New</span></div>
-    <img class="card-img" src="images/kettle.png" alt="Brew Electric Kettle">
+<section class="sec values" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Why Stashfin</h2>
+      <p>We are not trying to sell you a new appliance every eighteen months.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val">
+        <span class="num">01</span>
+        <h3>Motors that hold up</h3>
+        <p>Every motorised unit is specified at its true continuous wattage, not a peak number pulled for the box. If it says 750W, it delivers 750W under load.</p>
+      </div>
+      <div class="val">
+        <span class="num">02</span>
+        <h3>Parts you can replace</h3>
+        <p>Jars, gaskets, crumb trays and blades ship as individual spares. A worn component should cost you a part, not a whole new appliance.</p>
+      </div>
+      <div class="val">
+        <span class="num">03</span>
+        <h3>A warranty we honour</h3>
+        <p>Two years standard across the line, handled directly by our support team. No third-party claim portals and no runaround on service requests.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 03</span><span class="badge">Bestseller</span></div>
-    <img class="card-img" src="images/air-fryer.png" alt="Crisp Air Fryer">
+<section class="sec" id="specs">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Specifications</h2>
+      <p>Full technical reference for the Stashfin kitchen line.</p>
+    </div>
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Power</th><th>Capacity</th><th>Key feature</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mixer Grinder</td><td data-label="Power">750W copper motor</td><td data-label="Capacity">3 stainless jars</td><td data-label="Key feature">Overload protection</td></tr>
+          <tr><td>Electric Kettle</td><td data-label="Power">1500W</td><td data-label="Capacity">1.7 L</td><td data-label="Key feature">Auto shut-off</td></tr>
+          <tr><td>Air Fryer</td><td data-label="Power">1400W</td><td data-label="Capacity">4.5 qt basket</td><td data-label="Key feature">Digital presets</td></tr>
+          <tr><td>Induction Cooktop</td><td data-label="Power">2000W</td><td data-label="Capacity">Single burner</td><td data-label="Key feature">7 power levels, 2-hour timer</td></tr>
+          <tr><td>Toaster</td><td data-label="Power">800W</td><td data-label="Capacity">2 slices</td><td data-label="Key feature">6 browning levels</td></tr>
+          <tr><td>Microwave Oven</td><td data-label="Power">900W</td><td data-label="Capacity">0.8 cu. ft.</td><td data-label="Key feature">Convection, grill, child lock</td></tr>
+          <tr><td>Blender</td><td data-label="Power">1000W</td><td data-label="Capacity">4 interchangeable jars</td><td data-label="Key feature">3 speed settings</td></tr>
+          <tr><td>Rice Cooker</td><td data-label="Power">700W</td><td data-label="Capacity">8 cups cooked</td><td data-label="Key feature">Keep-warm mode</td></tr>
+          <tr><td>Sandwich Maker</td><td data-label="Power">800W</td><td data-label="Capacity">4 slices</td><td data-label="Key feature">Non-stick plates, ready light</td></tr>
+          <tr><td>Cold-Press Juicer</td><td data-label="Power">200W</td><td data-label="Capacity">Continuous feed</td><td data-label="Key feature">Slow-press, low noise</td></tr>
+        </tbody>
+      </table>
   </div>
+</section>
 
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 04</span></div>
-    <img class="card-img" src="images/induction-cooktop.png" alt="Flame Induction Cooktop">
+<section class="sec cta" id="contact">
+  <div class="wrap">
+    <h2>Stock Stashfin</h2>
+    <p>Retail, wholesale and private-label enquiries are handled directly by our team. Tell us what you need and we will send current availability and terms.</p>
+    <a href="mailto:hello@stashfin.com" class="btn btn-solid">hello@stashfin.com</a>
   </div>
+</section>
 
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 05</span></div>
-    <img class="card-img" src="images/toaster.png" alt="Crust 2-Slice Toaster">
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#" class="logo">Stashfin</a>
+        <p>Kitchen appliances engineered for everyday American homes.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="#products">Products</a>
+        <a href="#why">Why Stashfin</a>
+        <a href="#specs">Specifications</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="mailto:hello@stashfin.com">hello@stashfin.com</a>
+        <a href="#">Warranty registration</a>
+        <a href="#">Replacement parts</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Stashfin. All rights reserved.</span>
+      <span>Free shipping across the United States</span>
+    </div>
   </div>
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 06</span><span class="badge">New</span></div>
-    <img class="card-img" src="images/microwave.png" alt="Nova Microwave Oven">
-  </div>
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 07</span></div>
-    <img class="card-img" src="images/blender.png" alt="Whirl Blender">
-  </div>
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 08</span></div>
-    <img class="card-img" src="images/rice-cooker.png" alt="Steam Rice Cooker">
-  </div>
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 09</span></div>
-    <img class="card-img" src="images/sandwich-maker.png" alt="Press Sandwich Maker">
-  </div>
-
-  <div class="card">
-    <div class="tag-row"><span class="sku">SF / 10</span><span class="badge">New</span></div>
-    <img class="card-img" src="images/juicer.png" alt="Squeeze Cold-Press Juicer">
-  </div>
-
-</div>
-
-<div class="strip">
-  <div class="strip-track">
-    <span>Free shipping on every order</span>
-    <span>2-year standard warranty</span>
-    <span>Easy 30-day returns</span>
-    <span>Made for everyday kitchens</span>
-    <span>Free shipping on every order</span>
-    <span>2-year standard warranty</span>
-    <span>Easy 30-day returns</span>
-    <span>Made for everyday kitchens</span>
-  </div>
-</div>
-
-<div class="about" id="about">
-  <div>
-    <h2>Built like a stash, not a showroom.</h2>
-    <p>Stashfin isn't chasing every gadget trend. We stock the ten or so appliances a kitchen actually leans on week to week — sourced for reliable motors, honest wattage, and parts that are easy to replace. Everything here earns its shelf space.</p>
-    <p>Each product ships with a two-year warranty card and a spare-parts guide, because a kitchen tool is only as good as how long it lasts.</p>
-  </div>
-  <div class="stash-label mono">
-    <div class="row"><span>Category</span><strong>Kitchen Appliances</strong></div>
-    <div class="row"><span>Items in stash</span><strong>10</strong></div>
-    <div class="row"><span>Avg. warranty</span><strong>24 months</strong></div>
-    <div class="row"><span>Dispatch</span><strong>Within 24 hrs</strong></div>
-    <div class="row"><span>Returns</span><strong>30-day window</strong></div>
-  </div>
-</div>
-
-<footer id="footer">
-  <div class="brand">Stashfin</div>
-  <div>Kitchen Appliance Catalogue — Edition 001</div>
-  <div>hello@stashfin.com</div>
 </footer>
 
 </body>
